@@ -8,8 +8,8 @@
  $str = "123456";
 //echo md5(str)."<br/>";
 $pdo = new PDO("mysql:host=localhost;dbname=nicrecord","root","root",array(PDO::ATTR_PERSISTENT=>true));
-$rs = $pdo->query("select * from weekcount");
-$rs->setFetchMode(PDO::FETCH_NUM);
+$rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 12 WHERE weekcount.id = 0");
+//$rs->setFetchMode(PDO::FETCH_NUM);
 //$arr=array();
 //$result=array();
 //while($row = $rs->fetch()){
@@ -21,8 +21,10 @@ $rs->setFetchMode(PDO::FETCH_NUM);
 
 
 //$result['bao']=$arr;
-$row = $rs->fetch();
-//echo json_encode($row);
-echo $row[0][2];
+//$row = $rs->fetchAll();
+echo json_encode($rs);
+echo date("w");
+//echo "<script>alert('".$row[0][1]."')</script>";
+//echo $row[0][2];
 ?>
 

@@ -1,3 +1,20 @@
+<?php
+session_start();
+//检测是否登录，若没登录则转向登录页面
+if(!isset($_SESSION['uid'])){
+    header('Location:login.html');
+    exit();
+}
+include('../database/connectDB.php');//包含数据库连接文件
+$userid = $_SESSION['userid'];
+$username = $_SESSION['username'];
+$area_query_sql = "select build_id,build_name from build";
+$rs = $pdo->query($area_query_sql);
+$rs->setFetchMode(PDO::FETCH_NUM);
+$area_info = $rs->fetchAll();//获取建筑信息和建筑id
+//echo "<script>alert('".$row[0][1]."')</script>";
+//echo "<script>alert('".count($area_info)."')</script>";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +80,7 @@
                         </li>
 
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>注销</a>
+                        <li><a href="action.php?action=layout"><i class="fa fa-sign-out fa-fw"></i>注销</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -93,10 +110,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i>我的菜单<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">故障列表</a>
+                                    <a href="list.php">故障列表</a>
                                 </li>
                                 <li>
-                                    <a href="add.html">提交故障</a>
+                                    <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
                                     <a href="space.html">地点管理</a>
@@ -130,45 +147,42 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form">
+                                        <form role="form" name="addForm" method="post" action="action.php?action=addRepair" onsubmit="return InputCheck(this)">
                                             <div class="form-group">
                                                 <label>请选择时间</label>
-                                                <input type="text" class="form-control" value="2016-05-01" id="datetimepicker">
+                                                <input name="time" type="text" class="form-control" value="2016-05-01" id="datetimepicker">
 
                                             </div>
                                             <div class="form-group">
                                                 <label >请选择地点</label>
-                                                <select class="form-control">
-                                                    <option>办公楼</option>
-                                                    <option>文科楼</option>
-                                                    <option>图书馆</option>
-                                                    <option>机电楼</option>
-                                                    <option>食工楼</option>
+                                                <select id="build" name="build" class="form-control">
+                                                    <?php
+                                                        for($i=0;$i<11;$i++){
+                                                            echo "<option value=\"{$area_info[$i][0]}\">{$area_info[$i][1]}</option>";
+                                                        }
+
+                                                    ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <div  class="form-group">
                                                 <label>房间号</label>
-                                                <input class="form-control" placeholder="请输入数字">
+                                                <input id="room" name="room" class="form-control" >
                                             </div>
                                             <div class="form-group">
                                                 <label>故障描述</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="describe" name="describe" class="form-control" rows="3"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>故障原因</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="cause"  name="cause" class="form-control" rows="3"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>解决方法</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="solution" name="solution" class="form-control" rows="3"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>心得</label>
-                                                <textarea class="form-control" rows="3"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>备注</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="note" name="note" class="form-control" rows="3"></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-primary ">提交</button>
                                             <button type="reset" class="btn btn-warning">重置</button>
@@ -217,6 +231,16 @@
             todayHighlight:true,
             minView:2
         });
+        function InputCheck(addForm){
+            if(addForm.room.value==""){
+                alert("请输入房间号");
+                return (false);
+            }
+            if(addForm.describe.value==""){
+                alert("请输入故障描述");
+                return (false);
+            }
+        }
         //alert($("#datetimepicker").val()); //获取已经选择的时间的值
     </script>
 </body>

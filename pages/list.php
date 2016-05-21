@@ -1,3 +1,16 @@
+<?php
+session_start();
+//检测是否登录，若没登录则转向登录页面
+if(!isset($_SESSION['uid'])){
+    header('Location:login.html');
+    exit();
+}
+include('../database/connectDB.php');//包含数据库连接文件
+$userid = $_SESSION['userid'];
+$username = $_SESSION['username'];
+$query_sql = "select * from repair";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,10 +105,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i>我的菜单<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">故障列表</a>
+                                    <a href="list.php">故障列表</a>
                                 </li>
                                 <li>
-                                    <a href="add.html">提交故障</a>
+                                    <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
                                     <a href="space.html">地点管理</a>

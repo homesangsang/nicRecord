@@ -131,10 +131,10 @@ $time_count = $rs->fetch();
                             <a href="#"><i class="fa fa-files-o fa-fw"></i>我的菜单<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">故障列表</a>
+                                    <a href="list.php">故障列表</a>
                                 </li>
                                 <li>
-                                    <a href="add.html">提交故障</a>
+                                    <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
                                     <a href="space.html">地点管理</a>
@@ -172,7 +172,7 @@ $time_count = $rs->fetch();
                                 </div>
                             </div>
                         </div>
-                        <a href="blank.html">
+                        <a href="list.php">
                             <div class="panel-footer">
                                 <span class="pull-left">查看详情</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -194,7 +194,7 @@ $time_count = $rs->fetch();
                                 </div>
                             </div>
                         </div>
-                        <a href="add.html">
+                        <a href="add.php">
                             <div class="panel-footer">
                                 <span class="pull-left">点击提交</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
