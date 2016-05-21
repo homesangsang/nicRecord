@@ -8,7 +8,11 @@
  $str = "123456";
 //echo md5(str)."<br/>";
 $pdo = new PDO("mysql:host=localhost;dbname=nicrecord","root","root",array(PDO::ATTR_PERSISTENT=>true));
-$rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 12 WHERE weekcount.id = 0");
+//$rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 2 WHERE weekcount.id = 0");
+$area_query_sql = "select build_name,repair_count from build,buildcount where build.build_id=buildcount.build_id";
+$rs=$pdo->query($area_query_sql);
+$rs->setFetchMode(PDO::FETCH_NUM);
+$row = $rs->fetchAll();
 //$rs->setFetchMode(PDO::FETCH_NUM);
 //$arr=array();
 //$result=array();
@@ -22,8 +26,8 @@ $rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 12 WHERE weekcount.id = 0
 
 //$result['bao']=$arr;
 //$row = $rs->fetchAll();
-echo json_encode($rs);
-echo date("w");
+echo json_encode($row);
+//echo date("w");
 //echo "<script>alert('".$row[0][1]."')</script>";
 //echo $row[0][2];
 ?>

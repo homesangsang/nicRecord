@@ -39,7 +39,7 @@ switch($_GET['action']){
         $room = $_POST['room'];
         $repair_cause = $_POST['cause'];
         $solution = $_POST['solution'];
-        var_dump($_POST); //查看post中的所有数据
+//        var_dump($_POST); //查看post中的所有数据
 
         $note = $_POST['note'];
         $repair_id = date("Ymdhis",$repair_time);
@@ -59,16 +59,10 @@ switch($_GET['action']){
                 $time_sql = "select * from weekcount where id=0";
                 $require_time_pdo = $pdo->query($time_sql);
                 $require_time_count = $require_time_pdo->fetch();
-                $date =0;
-                if(date("w")==0){
-                    $date = 7;
-                }else {
-                    $date = date("w");
-                }
-                $require_time_count[$date]+=1;
+                $require_time_count[date("w")]+=1;
                 $week_arr = array(" ","one","two","three","four","five","six","seven");
 //                echo "<script>alert(".$week_arr[date("w")].");window.location='list.php'</script>";
-                $update_time_sql = "UPDATE weekcount SET ".$week_arr[$date]." = ".$require_time_count[$date]." WHERE weekcount.id = 0";
+                $update_time_sql = "UPDATE weekcount SET ".$week_arr[date("w")]." = ".$require_time_count[date("w")]." WHERE id = 0";
                 $rw = $pdo->exec($update_time_sql);
                 if($rw>0){
                     echo "<script>alert('提交成功');window.location='list.php'</script>";

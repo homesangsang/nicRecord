@@ -288,6 +288,7 @@ $time_count = $rs->fetch();
                 labels : [<?php  //循环遍历输出地区名称
                 for($i = 0;$i<count($area_count);$i++){
                        echo "\"".$area_count[$i][0]."\",";
+//                       echo "<script>alert('".$area_count[$i][1]."')</script>";
                 }
                ?>
                     ],
@@ -299,7 +300,7 @@ $time_count = $rs->fetch();
                         pointStrokeColor : "#fff",
                         data : [<?php  //循环遍历输出地区故障数
                         for($i = 0;$i<count($area_count);$i++){
-                               echo "\"".$area_count[$i][1]."\",";
+                               echo "{$area_count[$i][1]},";
                         }
                        ?>]
                     }
@@ -322,7 +323,7 @@ $time_count = $rs->fetch();
                         fillColor : "#9999FF",
                         strokeColor : "#fff",
                         data : [<?php  //循环遍历输出时间分布数据
-                        for($i = 0;$i<7;$i++){
+                        for($i = 1;$i<9;$i++){
                                echo "\"".$time_count[$i]."\",";
                         }
                        ?>]
