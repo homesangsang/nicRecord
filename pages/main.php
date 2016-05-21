@@ -12,11 +12,6 @@
     $build_query_sql = "select count(1) from build";
     $area_query_sql = "select build_name,repair_count from build,buildcount where build.build_id=buildcount.build_id";
     $time_query_sql = "select * from weekcount";
-//    //----
-//$check_sql = "select uid,username from users where uid='$id' and password='$password'";
-//$rs = $pdo->query($check_sql);
-//$rs->setFetchMode(PDO::FETCH_ASSOC);
-//$row = $rs->fetch();
 //查询故障数
     $rs = $pdo->query($repair_count_query_sql);
     $rs->setFetchMode(PDO::FETCH_NUM);
@@ -28,15 +23,15 @@
     $build_count = $row[0];
 //获取地区分布数据
     $rs = $pdo->query($area_query_sql);
-//    $row = $rs->fetchAll();
+
     $area_count = $rs->fetchAll();
-//    $i=0;
-//    while($row = $rs->fetch()){
-////        $temp=array();
-////        $temp[0]=$row[0];
-//        array_push($area_count,$row);
-//        }
+//
 // echo "<script>alert('".$build_count."')</script>";
+//获取时间分布数据
+$rs = $pdo->query($time_query_sql);
+//$rs->setFetchMode(PDO::FETCH_ASSOC);
+$time_count = $rs->fetch();
+// echo "<script>alert('".$time_count['mon']."')</script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +100,7 @@
                         </li>
 
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>注销</a>
+                        <li><a href="action.php?action=layout"><i class="fa fa-sign-out fa-fw"></i>注销</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -172,7 +167,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge"><?php echo ($repair_count)?></div>
                                     <div>故障数</div>
                                 </div>
                             </div>
@@ -216,7 +211,7 @@
                                     <i class="fa fa-cog fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge"><?php echo ($build_count)?></div>
                                     <div>地点</div>
                                 </div>
                             </div>
@@ -287,16 +282,26 @@
     <!-- Charts JavaScript -->
     <script src="../bower_components/chart/Chart.js"></script>
     <script>
+
         function initAreaChart(){
             var data = {
-                labels : ["图书馆","办公楼","机电楼","文科楼","轻化楼","食工楼","后勤楼"],
+                labels : [<?php  //循环遍历输出地区名称
+                for($i = 0;$i<count($area_count);$i++){
+                       echo "\"".$area_count[$i][0]."\",";
+                }
+               ?>
+                    ],
                 datasets : [
                     {
                         fillColor : "#66CCCC",
                         strokeColor : "#66FF66",
                         pointColor : "#669966",
                         pointStrokeColor : "#fff",
-                        data : [65,59,90,81,56,55,40]
+                        data : [<?php  //循环遍历输出地区故障数
+                        for($i = 0;$i<count($area_count);$i++){
+                               echo "\"".$area_count[$i][1]."\",";
+                        }
+                       ?>]
                     }
                 ]
             };
@@ -316,7 +321,11 @@
                     {
                         fillColor : "#9999FF",
                         strokeColor : "#fff",
-                        data : [0,9,3,2,1,5,30]
+                        data : [<?php  //循环遍历输出时间分布数据
+                        for($i = 0;$i<7;$i++){
+                               echo "\"".$time_count[$i]."\",";
+                        }
+                       ?>]
                     }
                 ]
             };

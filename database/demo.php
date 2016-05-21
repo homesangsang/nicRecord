@@ -8,7 +8,7 @@
  $str = "123456";
 //echo md5(str)."<br/>";
 $pdo = new PDO("mysql:host=localhost;dbname=nicrecord","root","root",array(PDO::ATTR_PERSISTENT=>true));
-$rs = $pdo->query("select build_name,repair_count from build,buildcount where build.build_id=buildcount.build_id");
+$rs = $pdo->query("select * from weekcount");
 $rs->setFetchMode(PDO::FETCH_NUM);
 //$arr=array();
 //$result=array();
@@ -21,8 +21,8 @@ $rs->setFetchMode(PDO::FETCH_NUM);
 
 
 //$result['bao']=$arr;
-$row = $rs->fetchAll();
-echo json_encode($row);
-
+$row = $rs->fetch();
+//echo json_encode($row);
+echo $row[0][2];
 ?>
 
