@@ -8,7 +8,11 @@ if(!isset($_SESSION['uid'])){
 include('../database/connectDB.php');//包含数据库连接文件
 $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
-$query_sql = "select * from repair";
+$query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
+$rs = $pdo->query($query_sql);
+//$rs->setAttribute(PDO::FETCH_NUM);
+$list = $rs->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +115,7 @@ $query_sql = "select * from repair";
                                     <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
-                                    <a href="space.html">地点管理</a>
+                                    <a href="usermanager.php">人员管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -153,62 +157,67 @@ $query_sql = "select * from repair";
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr onclick="openDetils()">
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051702</td>
-                                            <td>文科楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051702</td>
-                                            <td>图书馆</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2016XX051701</td>
-                                            <td>办公楼</td>
-                                            <td>连不上网</td>
-                                            <td>杨柳</td>
-                                            <td>2016-05-17</td>
-                                        </tr>
+                                        <?php
+                                            for($i=0;$i<count($list);$i++){
+                                                echo "<tr onclick=\"openDetils({$list[$i][6]})\"><td>{$list[$i][0]}</td><td>{$list[$i][1]} {$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td></tr>";
+                                            }
+                                        ?>
+<!--                                        <tr onclick="openDetils()">-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051702</td>-->
+<!--                                            <td>文科楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051702</td>-->
+<!--                                            <td>图书馆</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
 
 
                                         </tbody>

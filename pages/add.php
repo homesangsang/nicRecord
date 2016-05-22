@@ -116,7 +116,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
                                     <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
-                                    <a href="space.html">地点管理</a>
+                                    <a href="usermanager.php">人员管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -99,7 +99,7 @@
                                     <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
-                                    <a href="space.html">地点管理</a>
+                                    <a href="usermanager.php">人员管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -128,20 +128,20 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <form role="form">
+                                        <form role="form" name="resetForm" action="action.php?action=reset" method="post" onsubmit="return InputCheck(this)">
 
 
                                             <div class="form-group">
                                                 <label>输入旧密码</label>
-                                                <input class="form-control" type="password" placeholder="旧密码">
+                                                <input id="oldpw" name="oldpw" class="form-control" type="password" placeholder="旧密码">
                                             </div>
                                             <div class="form-group">
                                                 <label>输入新密码</label>
-                                                <input class="form-control" type="password" placeholder="新密码">
+                                                <input id="newpw" name="newpw" class="form-control" type="password" placeholder="新密码">
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary ">提交</button>
-                                            <button type="reset" class="btn btn-warning">重置</button>
+                                            <input type="submit" class="btn btn-primary "/>
+                                            <input type="reset" class="btn btn-warning"/>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
@@ -177,6 +177,21 @@
 
     <!-- my table JavaScript -->
     <script src="../dist/js/MyTable.js"></script>
+    <script>
+        function InputCheck(resetForm){
+            if(resetForm.oldpw.value==""){
+                alert("请输入旧密码");
+//                resetForm.id.focus();
+                return (false);
+            }
+            if(resetForm.newpw.value==""){
+                alert("请输入新密码");
+//                resetForm.password.focus();
+                return (false);
+            }
+        }
+
+    </script>
 </body>
 
 </html>

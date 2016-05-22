@@ -1,3 +1,21 @@
+<?php
+session_start();
+//检测是否登录，若没登录则转向登录页面
+if(!isset($_SESSION['uid'])){
+    header('Location:login.html');
+    exit();
+}
+include('../database/connectDB.php');//包含数据库连接文件
+$userid = $_SESSION['userid'];
+$username = $_SESSION['username'];
+$repair_id = $_GET['repair_id'];
+$query_sql = "select repair_id,build_name,room,repair_describe,repair_cause,solution,note,repair_time,users.username from repair,build,users where repair.id={$repair_id} and repair.build_id=build.build_id and repair.user_id=users.uid";
+$rs = $pdo->query($query_sql);
+//$rs->setAttribute(PDO::FETCH_NUM);
+$list = $rs->fetch();
+//echo "<script>alert('".$list[0]['username']."')</script>";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +42,7 @@
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--my css -->
     <link href="../dist/css/MyTable.css" rel="stylesheet"  type="text/css">
+    <link href="../bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -98,7 +117,7 @@
                                     <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
-                                    <a href="space.html">地点管理</a>
+                                    <a href="usermanager.php">人员管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -115,59 +134,33 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >地点管理</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >故障详情</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="panel panel-default">
-                           <!-- <div class="panel-heading">
-                                Kitchen Sink
-                            </div> -->
-                            <!-- /.panel-heading -->
+                            <div id="spaceName" class="panel-heading "><?php echo $list['build_name'].$list['room'] ?></div>
                             <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>地点</th>
-                                            <th width="50px">选项</th>
-                                            <th width="50px">  </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>办公楼</td>
-                                            <td>修改</td>
-                                            <td>删除</td>
-                                        </tr>
-                                        <tr>
-                                            <td>02</td>
-                                            <td>文科楼</td>
-                                            <td>修改</td>
-                                            <td>删除</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03</td>
-                                            <td>图书馆</td>
-                                            <td>修改</td>
-                                            <td>删除</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <p id="time"> <b>时间：</b><?php echo $list['repair_time']?></p>
+                                        <p id="username"> <b>维修人：</b><?php echo $list['username']?></p>
+                                        <p id="repairDescribe"> <b>故障描述：</b><?php echo $list['repair_describe']?></p>
+                                        <p id="repairCause"> <b>故障原因：</b><?php echo $list['repair_cause']?></p>
+                                        <p id="solution"> <b>解决方法：</b><?php echo $list['solution']?></p>
+                                        <p id="note"> <b>备注：</b><?php echo $list['note']?></p>
 
+                                    </div>
+                                    <!-- /.col-lg-10 (nested) -->
+                                </div>
+                            </div>
+                            <!--/.panel-body-->
+                        </div>
+                    </div>
+                    <!--/.col-lg-12-->
                 </div>
                 <!-- /.row -->
             </div>
@@ -177,7 +170,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+    <script>
+        $('#datetimepicker').datetimepicker();
+    </script>
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -189,8 +184,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
     <!-- my table JavaScript -->
     <script src="../dist/js/MyTable.js"></script>
+
 </body>
 
 </html>

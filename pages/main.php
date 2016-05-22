@@ -29,7 +29,7 @@
 // echo "<script>alert('".$build_count."')</script>";
 //获取时间分布数据
 $rs = $pdo->query($time_query_sql);
-//$rs->setFetchMode(PDO::FETCH_ASSOC);
+$rs->setFetchMode(PDO::FETCH_NUM);
 $time_count = $rs->fetch();
 // echo "<script>alert('".$time_count['mon']."')</script>";
 ?>
@@ -137,7 +137,7 @@ $time_count = $rs->fetch();
                                     <a href="add.php">提交故障</a>
                                 </li>
                                 <li>
-                                    <a href="space.html">地点管理</a>
+                                    <a href="usermanager.php">人员管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -212,11 +212,11 @@ $time_count = $rs->fetch();
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php echo ($build_count)?></div>
-                                    <div>地点</div>
+                                    <div>人员</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="space.html">
+                        <a href="usermanager.php">
                             <div class="panel-footer">
                                 <span class="pull-left">管理</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -323,9 +323,11 @@ $time_count = $rs->fetch();
                         fillColor : "#9999FF",
                         strokeColor : "#fff",
                         data : [<?php  //循环遍历输出时间分布数据
-                        for($i = 1;$i<9;$i++){
-                               echo "\"".$time_count[$i]."\",";
+                        for($i = 1;$i<8;$i++){
+                               echo "{$time_count[$i]},";
+//                               echo "<script>alert('".$time_count[$i]."')</script>";
                         }
+//                                echo "{$time_count[1]},{$time_count[2]},{$time_count[3]},{$time_count[4]},{$time_count[5]},{$time_count[6]},{$time_count[7]}";
                        ?>]
                     }
                 ]

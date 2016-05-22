@@ -1,6 +1,7 @@
 /**
  * Created by catkint-pc on 2016/5/17.
  */
-function openDetils(){//打开故障详情页
-    window.open("http://www.baidu.com");
+function openDetils(repair_id){//打开故障详情页
+
+    window.open("../pages/detail.php?repair_id="+repair_id);
 }
