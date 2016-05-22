@@ -9,11 +9,11 @@
 //echo md5(str)."<br/>";
 $pdo = new PDO("mysql:host=localhost;dbname=nicrecord","root","root",array(PDO::ATTR_PERSISTENT=>true));
 //$rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 2 WHERE weekcount.id = 0");
-$area_query_sql = "select uid,username,weight from users";
+$area_query_sql = "select weight from users where uid='201403061033'";
 //$temp = "select * from weekcount";
 $rs=$pdo->query($area_query_sql);
 //$rs->setFetchMode(PDO::FETCH_NUM);
-$row = $rs->fetchAll();
+$row = $rs->fetch();
 //$rs->setFetchMode(PDO::FETCH_NUM);
 //$arr=array();
 //$result=array();

@@ -6,13 +6,17 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $query_sql = "select uid,username,weight from users";
 $rs = $pdo->query($query_sql);
 //$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetchAll();
-
+$user_weight_sql = "select weight from users where uid='{$userid}'";
+$rs = $pdo->query($user_weight_sql);
+$user_weight = $rs->fetch();
+var_dump($_SESSION);
+//echo "<script>alert('".json_encode($userid)."')</script>"
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +76,7 @@ $list = $rs->fetchAll();
                 <!-- /.dropdown -->
                 <li class="dropdown ">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont">杨柳</em> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont"><?php echo $username?></em> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="reset.html"><i class="fa fa-wrench fa-fw"></i>修改密码</a>
@@ -157,9 +161,16 @@ $list = $rs->fetchAll();
                                         </thead>
                                         <tbody>
                                         <?php
-                                            for($i=0;$i<count($list);$i++){
-                                                echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td><a href='resetmanager.php?action=fix&userid={$list[$i][0]}'>修改</a></td><td><a href='resetmanager.php?action=delete&userid={$list[$i][0]}'>删除</a></td></tr>";
+                                            if($user_weight[0]=='1'){
+                                                for($i=0;$i<count($list);$i++){
+                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td><a href='resetuserinfo.php?action=fix&userid={$list[$i][0]}&username={$list[$i][1]}'>修改</a></td><td><a href='action.php?action=deleteuser&userid={$list[$i][0]}'>删除</a></td></tr>";
+                                                }
+                                            }else{
+                                                for($i=0;$i<count($list);$i++){
+                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td><a href='javascript:void(0);' onclick='alertError()'>修改</a></td><td><a href='javascript:void(0);' onclick='alertError()'>删除</a></td></tr>";
+                                                }
                                             }
+
                                         ?>
 <!--                                        <tr>-->
 <!--                                            <td>02</td>-->
@@ -180,7 +191,7 @@ $list = $rs->fetchAll();
                             </div>
                             <!-- /.panel-body -->
                             <div class="panel panel-footer">
-                                <a class="btn btn-primary ">增加人员</a>
+                                <a <?php if($user_weight[0]=='1'){echo "href='resetuserinfo.php?action=adduser'";}else{echo "href='javascript:void(0);' onclick='alertError()'";} ?>" class="btn btn-primary ">增加人员</a>
                             </div>
                         </div>
                         <!-- /.panel -->
@@ -210,6 +221,11 @@ $list = $rs->fetchAll();
     <script src="../dist/js/sb-admin-2.js"></script>
     <!-- my table JavaScript -->
     <script src="../dist/js/MyTable.js"></script>
+    <script>
+        function alertError(){
+            alert("sorry,您的权限不够");
+        }
+    </script>
 </body>
 
 </html>

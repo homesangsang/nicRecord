@@ -39,7 +39,7 @@ switch($_GET['action']){
         $room = $_POST['room'];
         $repair_cause = $_POST['cause'];
         $solution = $_POST['solution'];
-        var_dump($_POST); //查看post中的所有数据
+//        var_dump($_POST); //查看post中的所有数据
         $note = $_POST['note'];
         $repair_id = date("Ymdhis",$repair_time);
         $repair_time = $_POST['time'];
@@ -127,7 +127,43 @@ switch($_GET['action']){
             echo "<script>alert('旧密码输入错误');window.location='reset.html'</script>";
         }
         break;
+    case 'fix':
+//        var_dump($_POST);
+        $user_id = $_POST['user_id'];
+        $username = $_POST['username'];
+        $update_userinfo_sql = "update users set username='{$username}' where uid={$user_id}";
+        $rs = $pdo->exec($update_userinfo_sql);
+        if($rs){
+            echo "<script>alert('用户信息修改成功');window.location='usermanager.php'</script>";
+        }else{
+            echo "<script>alert('出错啦 (update username fail)');window.location='resetuserinfo.php?action=fix&userid={$user_id}&username={$username}'</script>";
+        }
+        break;
+    case 'deleteuser':
+        $user_id = $_GET['userid'];
+        $deleteuser_sql = "delete from users where uid={$user_id}";
+        $rs = $pdo->exec($deleteuser_sql);
+        if($rs){
+            echo "<script>window.location='usermanager.php'</script>";
+        }else{
+            echo "<script>alert('出错啦 (delete user fail)');window.location='usermanager.php'</script>";
 
+        }
+        break;
+    case 'adduser':
+//        var_dump($_POST);
+        $user_id = $_POST['user_id'];
+        $username = $_POST['username'];
+        $password = sha1($_POST['password']);
+        $adduser_sql  = "insert into users (uid,username,password,weight) VALUES ('{$user_id}','{$username}','{$password}','0')";
+        $rs = $pdo->exec($adduser_sql);
+        if($rs){
+            echo "<script>alert('添加成功');window.location='usermanager.php'</script>";
+        }else{
+            echo "<script>alert('出错啦 (add user fail)');window.location='resetuserinfo.php?action=adduser'</script>";
+
+        }
+        break;
     default:break;
 }
 

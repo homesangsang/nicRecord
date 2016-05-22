@@ -6,14 +6,8 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
-$area_query_sql = "select build_id,build_name from build";
-$rs = $pdo->query($area_query_sql);
-$rs->setFetchMode(PDO::FETCH_NUM);
-$area_info = $rs->fetchAll();//获取建筑信息和建筑id
-//echo "<script>alert('".$row[0][1]."')</script>";
-//echo "<script>alert('".count($area_info)."')</script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +74,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
                         </li>
 
                         <li class="divider"></li>
-                        <li><a href="action.php?action=layout"><i class="fa fa-sign-out fa-fw"></i>注销</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>注销</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -133,7 +127,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >提交故障</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >请填写用户信息</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -141,51 +135,28 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                请填写以下内容
-                            </div>
+
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <form role="form" name="addForm" method="post" action="action.php?action=addRepair" onsubmit="return InputCheck(this)">
-                                            <div class="form-group">
-                                                <label>请选择时间</label>
-                                                <input name="time" type="text" class="form-control" value="2016-05-01" id="datetimepicker">
+                                    <div class="col-lg-3">
+                                        <form role="form" name="resetForm" action="action.php?action=<?php echo $_GET['action']?>" method="post" onsubmit="return InputCheck(this)">
 
-                                            </div>
-                                            <div class="form-group">
-                                                <label >请选择地点</label>
-                                                <select id="build" name="build" class="form-control">
-                                                    <?php
-                                                        for($i=0;$i<11;$i++){
-                                                            echo "<option value=\"{$area_info[$i][0]}\">{$area_info[$i][1]}</option>";
-                                                        }
 
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div  class="form-group">
-                                                <label>房间号</label>
-                                                <input id="room" name="room" class="form-control" >
+                                            <div class="form-group">
+                                                <label>账号</label>
+                                                <input id="user_id" name="user_id" class="form-control" type="text" <?php if($_GET['action']=="fix")echo "readonly=\"readonly\"" ?>  value="<?php echo $_GET['userid']?>">
                                             </div>
                                             <div class="form-group">
-                                                <label>故障描述</label>
-                                                <textarea id="describe" name="describe" class="form-control" rows="3"></textarea>
+                                                <label>姓名</label>
+                                                <input id="username" name="username" class="form-control" type="text" value="<?php echo $_GET['username']?>">
                                             </div>
-                                            <div class="form-group">
-                                                <label>故障原因</label>
-                                                <textarea id="cause"  name="cause" class="form-control" rows="3"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>解决方法</label>
-                                                <textarea id="solution" name="solution" class="form-control" rows="3"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>心得</label>
-                                                <textarea id="note" name="note" class="form-control" rows="3"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary ">提交</button>
-                                            <button type="reset" class="btn btn-warning">重置</button>
+                                            <?php
+                                            if($_GET['action']=="adduser"){
+                                                echo "<div class=\"form-group\"><label>密码</label><input id='password' name='password' class='form-control' type='password'></div>";
+                                            }
+                                            ?>
+                                            <input type="submit" class="btn btn-primary "/>
+                                            <input type="reset" class="btn btn-warning"/>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
@@ -204,9 +175,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
 
     </div>
     <!-- /#wrapper -->
-    <script>
-        $('#datetimepicker').datetimepicker();
-    </script>
+
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -218,30 +187,28 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-    <!-- bootstrap-datetimepicker JavaScript -->
-    <script src="../bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-    <script src="../bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
     <!-- my table JavaScript -->
     <script src="../dist/js/MyTable.js"></script>
-    <script type="text/javascript">
-        $("#datetimepicker").datetimepicker({
-            format:'yyyy-mm-dd',
-            language:'zh-CN',
-            autoclose:true,
-            todayHighlight:true,
-            minView:2
-        });
-        function InputCheck(addForm){
-            if(addForm.room.value==""){
-                alert("请输入房间号");
+    <script>
+        function InputCheck(resetForm){
+            if(resetForm.user_id.value==""){
+                alert("请输入账号");
+//                resetForm.id.focus();
                 return (false);
             }
-            if(addForm.describe.value==""){
-                alert("请输入故障描述");
+            if(resetForm.username.value==""){
+                alert("请输入姓名");
+//                resetForm.password.focus();
                 return (false);
             }
+            <?php
+            if($_GET['action']=="adduser"){
+            echo "if(resetForm.password.value==\"\"){alert(\"请输入密码\");return (false);}";
+            }
+            ?>
         }
-        //alert($("#datetimepicker").val()); //获取已经选择的时间的值
+
     </script>
 </body>
 

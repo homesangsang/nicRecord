@@ -72,7 +72,7 @@ $list = $rs->fetchAll();
                 <!-- /.dropdown -->
                 <li class="dropdown ">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont">杨柳</em> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont"><?php echo $username?></em> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="reset.html"><i class="fa fa-wrench fa-fw"></i>修改密码</a>
