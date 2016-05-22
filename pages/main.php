@@ -9,7 +9,7 @@
     $userid = $_SESSION['userid'];
     $username = $_SESSION['username'];
     $repair_count_query_sql = "select count(1) from repair";
-    $build_query_sql = "select count(1) from build";
+    $users_query_sql = "select count(1) from users";
     $area_query_sql = "select build_name,repair_count from build,buildcount where build.build_id=buildcount.build_id";
     $time_query_sql = "select * from weekcount";
 //查询故障数
@@ -18,9 +18,9 @@
     $row = $rs->fetch();
     $repair_count = $row[0];
 //查询地点数
-    $rs = $pdo->query($build_query_sql);
+    $rs = $pdo->query($users_query_sql);
     $row = $rs->fetch();
-    $build_count = $row[0];
+    $users_count = $row[0];
 //获取地区分布数据
     $rs = $pdo->query($area_query_sql);
 
@@ -208,10 +208,10 @@ $time_count = $rs->fetch();
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-cog fa-5x"></i>
+                                    <i class="fa fa-user fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo ($build_count)?></div>
+                                    <div class="huge"><?php echo ($users_count)?></div>
                                     <div>人员</div>
                                 </div>
                             </div>

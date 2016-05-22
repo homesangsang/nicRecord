@@ -15,7 +15,7 @@ $list = $rs->fetchAll();
 $user_weight_sql = "select weight from users where uid='{$userid}'";
 $rs = $pdo->query($user_weight_sql);
 $user_weight = $rs->fetch();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 //echo "<script>alert('".json_encode($userid)."')</script>"
 ?>
 
