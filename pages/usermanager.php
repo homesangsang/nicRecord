@@ -2,7 +2,7 @@
 session_start();
 //检测是否登录，若没登录则转向登录页面
 if(!isset($_SESSION['uid'])){
-    header('Location:login.html');
+    header('Location:login.php');
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
@@ -80,7 +80,7 @@ $user_weight = $rs->fetch();
                         </li>
 
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>注销</a>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i>注销</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -215,7 +215,7 @@ $user_weight = $rs->fetch();
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="../dist/js/admin_system.js"></script>
     <!-- my table JavaScript -->
     <script src="../dist/js/Myfunction.js"></script>
     <script>

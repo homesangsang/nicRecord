@@ -13,22 +13,29 @@ if(empty($_POST['id']) && empty($_GET['action'])){
 }
 switch($_GET['action']){
     case 'login':
-        $id = htmlspecialchars(trim($_POST['id']));
-        $password = sha1($_POST['password']);
+        $trueVerification = strtoupper($_SESSION['verification']);
+        $userVerification = strtoupper($_POST['verification']);
+        if($userVerification==$trueVerification){
+            $id = htmlspecialchars(trim($_POST['id']));
+            $password = sha1($_POST['password']);
 
-        $check_sql = "select uid,username from users where uid='$id' and password='$password'";
-        $rs = $pdo->query($check_sql);
-        $rs->setFetchMode(PDO::FETCH_ASSOC);
-        $row = $rs->fetch();
-        if($id==$row['uid']){
-            //登录成功
-            $_SESSION['uid'] = $row['uid'];
-            $_SESSION['username'] = $row['username'];
-            echo "<script>window.location='main.php'</script>";
+            $check_sql = "select uid,username from users where uid='$id' and password='$password'";
+            $rs = $pdo->query($check_sql);
+            $rs->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $rs->fetch();
+            if($id==$row['uid']){
+                //登录成功
+                $_SESSION['uid'] = $row['uid'];
+                $_SESSION['username'] = $row['username'];
+                echo "<script>window.location='main.php'</script>";
 
+            }else{
+                echo "<script>alert('用户名或密码错,请重试');window.location='login.php?id={$id}';</script>";
+            }
         }else{
-            echo "<script>alert('用户名或密码错，请重试');window.location='login.html';</script>";
+            echo "<script>alert('验证码错误,请重试');window.location='login.php?id={$id}';</script>";
         }
+
         break;
     case 'addRepair':
         $user_id = $_SESSION['uid'];
@@ -95,11 +102,11 @@ switch($_GET['action']){
         unset($_SESSION['uid']);
         unset($_SESSION['username']);
         session_destroy();
-        echo "<script>window.location='login.html'</script>";
+        echo "<script>window.location='login.php'</script>";
         break;
     case 'reset':
         if(!isset($_SESSION['uid'])){
-            header('Location:login.html');
+            header('Location:login.php');
             exit();
         }
         $oldpw = sha1($_POST['oldpw']);

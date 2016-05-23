@@ -2,7 +2,7 @@
 session_start();
 //检测是否登录，若没登录则转向登录页面
 if(!isset($_SESSION['uid'])){
-    header('Location:login.html');
+    header('Location:login.php');
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
@@ -202,9 +202,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
 
     </div>
     <!-- /#wrapper -->
-    <script>
-        $('#datetimepicker').datetimepicker();
-    </script>
+
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -215,13 +213,17 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="../dist/js/admin_system.js"></script>
     <!-- bootstrap-datetimepicker JavaScript -->
     <script src="../bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
     <script src="../bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <!-- my table JavaScript -->
     <script src="../dist/js/Myfunction.js"></script>
+    <script>
+        $('#datetimepicker').datetimepicker();
+    </script>
     <script type="text/javascript">
+
         $("#datetimepicker").datetimepicker({
             format:'yyyy-mm-dd',
             language:'zh-CN',
