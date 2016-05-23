@@ -25,7 +25,6 @@ switch($_GET['action']){
             $_SESSION['uid'] = $row['uid'];
             $_SESSION['username'] = $row['username'];
             echo "<script>window.location='main.php'</script>";
-//    echo $row['username'];
 
         }else{
             echo "<script>alert('用户名或密码错，请重试');window.location='login.html';</script>";
@@ -40,7 +39,6 @@ switch($_GET['action']){
         $room = $_POST['room'];
         $repair_cause = $_POST['cause'];
         $solution = $_POST['solution'];
-//        var_dump($_POST); //查看post中的所有数据
         $note = $_POST['note'];
         $repair_id = date("Ymdhis",$repair_time);
         $repair_time = $_POST['time'];
@@ -64,14 +62,10 @@ switch($_GET['action']){
         }
         $require_time_count[$date]+=1;
         $week_arr = array(" ","one","two","three","four","five","six","seven");
-//      echo "<script>alert(".$week_arr[date("w")].");window.location='list.php'</script>";
         $update_time_sql = "UPDATE weekcount SET ".$week_arr[$date]." = ".$require_time_count[$date]." WHERE weekcount.id = 0";
         $search_content_str = $username.$room.$repair_cause.$repair_describe.$note.$solution;
         $add_search_content_sql = "insert into search (repair_id,content) VALUES ('{$repair_id}','{$search_content_str}')";
-//        echo $search_content_str;
-        ////////////
         $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
-
         try {
             $pdo->beginTransaction(); // 开启一个事务
             $row = null;
@@ -96,10 +90,6 @@ switch($_GET['action']){
         }finally{
             $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, true);
         }
-
-        ///////////
-
-
         break;
     case 'layout':
         unset($_SESSION['uid']);
@@ -118,9 +108,7 @@ switch($_GET['action']){
         $query_pw_sql = "select password from users where uid={$user_id} ";
         $rsult = $pdo->query($query_pw_sql);
         $rsult->setFetchMode(PDO::FETCH_NUM);
-//        $rs->setFetchMode(PDO::FETCH_ASSOC);
         $row = $rsult->fetch();
-//        echo json_encode($row[0]);
         if($row[0]==$oldpw){
             $update_pw_sql = "update users set password='{$newpw}' where users.uid={$user_id}";
             $rs=$pdo->exec($update_pw_sql);
@@ -134,7 +122,6 @@ switch($_GET['action']){
         }
         break;
     case 'fix':
-//        var_dump($_POST);
         $user_id = $_POST['user_id'];
         $username = $_POST['username'];
         $update_userinfo_sql = "update users set username='{$username}' where uid={$user_id}";
@@ -157,7 +144,6 @@ switch($_GET['action']){
         }
         break;
     case 'adduser':
-//        var_dump($_POST);
         $user_id = $_POST['user_id'];
         $username = $_POST['username'];
         $password = sha1($_POST['password']);

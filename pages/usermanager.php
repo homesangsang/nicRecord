@@ -10,13 +10,10 @@ $userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $query_sql = "select uid,username,weight from users";
 $rs = $pdo->query($query_sql);
-//$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetchAll();
 $user_weight_sql = "select weight from users where uid='{$userid}'";
 $rs = $pdo->query($user_weight_sql);
 $user_weight = $rs->fetch();
-//var_dump($_SESSION);
-//echo "<script>alert('".json_encode($userid)."')</script>"
 ?>
 
 <!DOCTYPE html>

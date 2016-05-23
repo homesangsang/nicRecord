@@ -17,9 +17,7 @@ if($type=='list'){
     $query_sql = "select repair_id,build_name,room,repair_describe,repair_cause,solution,note,repair_time,users.username from repair,build,users where repair.repair_id={$repair_id} and repair.build_id=build.build_id and repair.user_id=users.uid";
 }
 $rs = $pdo->query($query_sql);
-//$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetch();
-//echo "<script>alert('".$list[0]['username']."')</script>";
 ?>
 
 <!DOCTYPE html>

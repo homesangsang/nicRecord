@@ -12,8 +12,6 @@ $area_query_sql = "select build_id,build_name from build";
 $rs = $pdo->query($area_query_sql);
 $rs->setFetchMode(PDO::FETCH_NUM);
 $area_info = $rs->fetchAll();//获取建筑信息和建筑id
-//echo "<script>alert('".$row[0][1]."')</script>";
-//echo "<script>alert('".count($area_info)."')</script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">

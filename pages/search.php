@@ -11,7 +11,6 @@ $username = $_SESSION['username'];
 $search_str = $_GET['search_str'];
 $query_sql = "SELECT * FROM search WHERE content LIKE '%{$search_str}%'";
 $rs = $pdo->query($query_sql);
-//$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetchAll();
 
 ?>

@@ -10,7 +10,6 @@ $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
 $query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
 $rs = $pdo->query($query_sql);
-//$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetchAll();
 
 ?>

@@ -25,13 +25,10 @@
     $rs = $pdo->query($area_query_sql);
 
     $area_count = $rs->fetchAll();
-//
-// echo "<script>alert('".$build_count."')</script>";
 //获取时间分布数据
 $rs = $pdo->query($time_query_sql);
 $rs->setFetchMode(PDO::FETCH_NUM);
 $time_count = $rs->fetch();
-// echo "<script>alert('".$time_count['mon']."')</script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
