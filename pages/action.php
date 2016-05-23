@@ -165,7 +165,13 @@ switch($_GET['action']){
         break;
     default:break;
 }
-
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+</html>
 
 
 
