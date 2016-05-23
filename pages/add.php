@@ -94,9 +94,9 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="搜索...">
+                                <input id="search_str" type="text" class="form-control" placeholder="搜索...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button onclick="search()"  class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -150,7 +150,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
                                         <form role="form" name="addForm" method="post" action="action.php?action=addRepair" onsubmit="return InputCheck(this)">
                                             <div class="form-group">
                                                 <label>请选择时间</label>
-                                                <input name="time" type="text" class="form-control" value="2016-05-01" id="datetimepicker">
+                                                <input name="time" type="text" class="form-control" value="<?php echo date('Y-m-d') ?>" id="datetimepicker">
 
                                             </div>
                                             <div class="form-group">
@@ -222,7 +222,7 @@ $area_info = $rs->fetchAll();//获取建筑信息和建筑id
     <script src="../bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
     <script src="../bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <!-- my table JavaScript -->
-    <script src="../dist/js/MyTable.js"></script>
+    <script src="../dist/js/Myfunction.js"></script>
     <script type="text/javascript">
         $("#datetimepicker").datetimepicker({
             format:'yyyy-mm-dd',

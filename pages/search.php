@@ -1,3 +1,21 @@
+<?php
+session_start();
+//检测是否登录，若没登录则转向登录页面
+if(!isset($_SESSION['uid'])){
+    header('Location:login.html');
+    exit();
+}
+include('../database/connectDB.php');//包含数据库连接文件
+$userid = $_SESSION['userid'];
+$username = $_SESSION['username'];
+$search_str = $_GET['search_str'];
+$query_sql = "SELECT * FROM search WHERE content LIKE '%{$search_str}%'";
+$rs = $pdo->query($query_sql);
+//$rs->setAttribute(PDO::FETCH_NUM);
+$list = $rs->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +42,6 @@
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--my css -->
     <link href="../dist/css/MyTable.css" rel="stylesheet"  type="text/css">
-    <link href="../bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -56,7 +73,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown ">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont">杨柳</em> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <em class="fa yaheiFont"><?php echo $username?></em> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="reset.html"><i class="fa fa-wrench fa-fw"></i>修改密码</a>
@@ -116,7 +133,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >修改密码</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >查询结果</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -124,33 +141,94 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-
+                           <!-- <div class="panel-heading">
+                                Kitchen Sink
+                            </div> -->
+                            <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <form role="form" name="resetForm" action="action.php?action=reset" method="post" onsubmit="return InputCheck(this)">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th width="100px">ID</th>
+                                            <th>内容</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            for($i=0;$i<count($list);$i++){
+                                                echo "<tr onclick=\"openDetils({$list[$i]['repair_id']})\"><td>{$list[$i]['repair_id']}</td><td>{$list[$i]['content']}</td></tr>";
+                                            }
+                                        ?>
+<!--                                        <tr onclick="openDetils()">-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051702</td>-->
+<!--                                            <td>文科楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051702</td>-->
+<!--                                            <td>图书馆</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>2016XX051701</td>-->
+<!--                                            <td>办公楼</td>-->
+<!--                                            <td>连不上网</td>-->
+<!--                                            <td>杨柳</td>-->
+<!--                                            <td>2016-05-17</td>-->
+<!--                                        </tr>-->
 
 
-                                            <div class="form-group">
-                                                <label>输入旧密码</label>
-                                                <input id="oldpw" name="oldpw" class="form-control" type="password" placeholder="旧密码">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>输入新密码</label>
-                                                <input id="newpw" name="newpw" class="form-control" type="password" placeholder="新密码">
-                                            </div>
-
-                                            <input type="submit" class="btn btn-primary "/>
-                                            <input type="reset" class="btn btn-warning"/>
-                                        </form>
-                                    </div>
-                                    <!-- /.col-lg-6 (nested) -->
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- /.table-responsive -->
                             </div>
-                            <!--/.panel-body-->
+                            <!-- /.panel-body -->
                         </div>
+                        <!-- /.panel -->
                     </div>
-                    <!--/.col-lg-12-->
+                    <!-- /.col-lg-12 -->
+
                 </div>
                 <!-- /.row -->
             </div>
@@ -160,9 +238,7 @@
 
     </div>
     <!-- /#wrapper -->
-    <script>
-        $('#datetimepicker').datetimepicker();
-    </script>
+
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -174,23 +250,12 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
     <!-- my table JavaScript -->
-    <script src="../dist/js/Myfunction.js"></script>
     <script>
-        function InputCheck(resetForm){
-            if(resetForm.oldpw.value==""){
-                alert("请输入旧密码");
-//                resetForm.id.focus();
-                return (false);
-            }
-            if(resetForm.newpw.value==""){
-                alert("请输入新密码");
-//                resetForm.password.focus();
-                return (false);
-            }
-        }
+        function openDetils(repair_id){//打开故障详情页
 
+            window.open("../pages/detail.php?type=search&repair_id="+repair_id);
+        }
     </script>
 </body>
 

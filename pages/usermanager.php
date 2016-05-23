@@ -97,9 +97,9 @@ $user_weight = $rs->fetch();
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="搜索...">
+                                <input id="search_str" type="text" class="form-control" placeholder="搜索...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button onclick="search()"  class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -220,7 +220,7 @@ $user_weight = $rs->fetch();
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
     <!-- my table JavaScript -->
-    <script src="../dist/js/MyTable.js"></script>
+    <script src="../dist/js/Myfunction.js"></script>
     <script>
         function alertError(){
             alert("sorry,您的权限不够");

@@ -8,8 +8,14 @@ if(!isset($_SESSION['uid'])){
 include('../database/connectDB.php');//包含数据库连接文件
 $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
+$type = $_GET['type'];
 $repair_id = $_GET['repair_id'];
-$query_sql = "select repair_id,build_name,room,repair_describe,repair_cause,solution,note,repair_time,users.username from repair,build,users where repair.id={$repair_id} and repair.build_id=build.build_id and repair.user_id=users.uid";
+$query_sql = null;
+if($type=='list'){
+    $query_sql = "select repair_id,build_name,room,repair_describe,repair_cause,solution,note,repair_time,users.username from repair,build,users where repair.id={$repair_id} and repair.build_id=build.build_id and repair.user_id=users.uid";
+}else{
+    $query_sql = "select repair_id,build_name,room,repair_describe,repair_cause,solution,note,repair_time,users.username from repair,build,users where repair.repair_id={$repair_id} and repair.build_id=build.build_id and repair.user_id=users.uid";
+}
 $rs = $pdo->query($query_sql);
 //$rs->setAttribute(PDO::FETCH_NUM);
 $list = $rs->fetch();
@@ -95,9 +101,9 @@ $list = $rs->fetch();
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="搜索...">
+                                <input id="search_str" type="text" class="form-control" placeholder="搜索...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button onclick="search()"  class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -186,7 +192,7 @@ $list = $rs->fetch();
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <!-- my table JavaScript -->
-    <script src="../dist/js/MyTable.js"></script>
+    <script src="../dist/js/Myfunction.js"></script>
 
 </body>
 

@@ -33,6 +33,7 @@ switch($_GET['action']){
         break;
     case 'addRepair':
         $user_id = $_SESSION['uid'];
+        $username = $_SESSION['username'];
         $repair_time = time();
         $build_id = $_POST['build'];
         $repair_describe = $_POST['describe'];
@@ -65,7 +66,9 @@ switch($_GET['action']){
         $week_arr = array(" ","one","two","three","four","five","six","seven");
 //      echo "<script>alert(".$week_arr[date("w")].");window.location='list.php'</script>";
         $update_time_sql = "UPDATE weekcount SET ".$week_arr[$date]." = ".$require_time_count[$date]." WHERE weekcount.id = 0";
-
+        $search_content_str = $username.$room.$repair_cause.$repair_describe.$note.$solution;
+        $add_search_content_sql = "insert into search (repair_id,content) VALUES ('{$repair_id}','{$search_content_str}')";
+//        echo $search_content_str;
         ////////////
         $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
 
@@ -81,6 +84,9 @@ switch($_GET['action']){
             $row = $pdo->exec($update_time_sql); // 执行第三个 SQL
             if (!$row)
                 throw new PDOException('update time fail');
+            $row = $pdo->exec($add_search_content_sql); // 执行第四个 SQL
+            if (!$row)
+                throw new PDOException('insert search content fail');
             $pdo->commit();
             echo "<script>alert('提交成功');window.location='list.php'</script>";
         } catch (PDOException $e) {

@@ -5,33 +5,21 @@
  * Date: 2016/5/19
  * Time: 16:32
  */
- $str = "123456";
-//echo md5(str)."<br/>";
+// $str = "%客户端%";
 $pdo = new PDO("mysql:host=localhost;dbname=nicrecord","root","root",array(PDO::ATTR_PERSISTENT=>true));
-//$rs = $pdo->exec("UPDATE nicrecord.weekcount SET six = 2 WHERE weekcount.id = 0");
-$area_query_sql = "select weight from users where uid='201403061033'";
-//$temp = "select * from weekcount";
-$rs=$pdo->query($area_query_sql);
-//$rs->setFetchMode(PDO::FETCH_NUM);
+$area_query_sql = "SELECT * FROM search WHERE content LIKE '%端%' ";
+//echo $area_query_sql;
+$rs = $pdo->query($area_query_sql);
+//
+$rs->setFetchMode(PDO::FETCH_NUM);
 $row = $rs->fetch();
-//$rs->setFetchMode(PDO::FETCH_NUM);
-//$arr=array();
-//$result=array();
-//while($row = $rs->fetch()){
-//    //echo ($row[0].$row[1]);
-////    echo json_encode($row);
-////    array_push($arr,$row);
-//    echo $row[1];
-//}
-
-
-//$result['bao']=$arr;
-//$row = $rs->fetchAll();
 echo json_encode($row);
-//echo sha1("123456");
-//echo count($row);
-//echo date("w");
-//echo "<script>alert('".$row[0][1]."')</script>";
-//echo $row[0][2];
+////$rs->setFetchMode(PDO::FETCH_NUM);
+//
+//
+////echo "<script>alert('".$row[0][1]."')</script>";
+////echo $row[0][2];
+echo date('Y-m-d');
+
 ?>
 
