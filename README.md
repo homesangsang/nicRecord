@@ -103,7 +103,9 @@
   `seven` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+
 ***
+
 ##界面如下
 ![login](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/login.png)
   ![dashboard](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/dashboard.png)
