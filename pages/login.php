@@ -58,7 +58,7 @@
                                             <img id="checkpic" style="width: 150px;height: 50px;" class="img-responsive img-rounded" onclick="change()" src="verificationCode.php"/>
                                         </div>
                                         <div class="col-md-7 col-xs-7">
-                                            <input class="form-control" style="height: 50px" placeholder="请输入验证码" name="verification" type="password" value="">
+                                            <input class="form-control" style="height: 50px" placeholder="请输入验证码" name="verification" type="text" value="">
                                         </div>
 
 
