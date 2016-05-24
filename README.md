@@ -38,4 +38,5 @@
 ------verificationCode.php 验证码生成页面
 ***
 ##界面如下
-  
+![login](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/login.png)
+  ![dashboard](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/dashboard.png)
