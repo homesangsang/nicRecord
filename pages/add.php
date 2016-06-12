@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $area_query_sql = "select build_id,build_name from build";
 $rs = $pdo->query($area_query_sql);

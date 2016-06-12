@@ -6,7 +6,7 @@
         exit();
     }
     include('../database/connectDB.php');//包含数据库连接文件
-    $userid = $_SESSION['userid'];
+    $userid = $_SESSION['uid'];
     $username = $_SESSION['username'];
     $repair_count_query_sql = "select count(1) from repair";
     $users_query_sql = "select count(1) from users";

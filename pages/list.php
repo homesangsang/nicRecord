@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
 $rs = $pdo->query($query_sql);

@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $search_str = $_GET['search_str'];
 $query_sql = "SELECT * FROM search WHERE content LIKE '%{$search_str}%'";

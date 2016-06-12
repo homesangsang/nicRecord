@@ -46,7 +46,7 @@
                         <form role="form" name="LoginForm" method="post" action="action.php?action=login" onsubmit="return InputCheck(this)" >
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="账号" name="id" type="id" value="<?php echo $_GET['id']?>"  autofocus>
+                                    <input class="form-control" placeholder="账号" name="id" type="id" value=""  autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="密码" name="password" type="password" value="">
