@@ -1,6 +1,8 @@
 # nicRecord
 ##网络中心故障登记系统
-- 实现了故障登记，查找，人员管理等功能。
+- 实现了故障登记，查找，人员管理等功能
+
+- 每个地区发生故障总数分布，以及按星期分布的故障总数统计图 
 
 - 支持数据库的模糊搜索
 
@@ -103,7 +105,9 @@
   `seven` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+
 ***
+
 ##界面如下
 ![login](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/login.png)
   ![dashboard](https://raw.githubusercontent.com/catkint/nicRecord/master/dist/image/dashboard.png)
