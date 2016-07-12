@@ -8,10 +8,12 @@ if(!isset($_SESSION['uid'])){
 include('../database/connectDB.php');//包含数据库连接文件
 $userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
-$query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
+$query_sql = "select * from addressbook";
 $rs = $pdo->query($query_sql);
-$list = $rs->fetchAll();
-
+$list = $rs->fetchAll();//所有通讯录信息
+$user_weight_sql = "select weight from users where uid='{$userid}'";//查询当前用户的权重
+$rs = $pdo->query($user_weight_sql);
+$user_weight = $rs->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -150,7 +152,7 @@ $list = $rs->fetchAll();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >故障列表</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >网络中心通讯录</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -167,83 +169,71 @@ $list = $rs->fetchAll();
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th width="50px">ID</th>
-                                            <th>地点</th>
-                                            <th>故障</th>
-                                            <th width="70px">维修人</th>
-                                            <th width="100px">时间</th>
+                                            <th>ID</th>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>居住地</th>
+                                            <th>手机号</th>
+                                            <th>QQ</th>
+                                            <th>微信</th>
+                                            <th>工作单位</th>
+                                            <th>职务</th>
+                                            <th width="50px">选项</th>
+                                            <th width="50px">  </th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-                                            for($i=0;$i<count($list);$i++){
-                                                echo "<tr onclick=\"openDetils({$list[$i][6]})\"><td>{$list[$i][0]}</td><td>{$list[$i][1]} {$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td></tr>";
+                                            $isM = true;
+                                            $isW = false;
+                                            if($user_weight[0]=='1'){
+                                                for($i=0;$i<count($list);$i++){
+                                                    if($list[$i][2]=='女'){
+                                                        $isM = false;
+                                                        $isW = true;
+                                                    }
+                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td>{$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td><td>{$list[$i][6]}</td><td>{$list[$i][7]}</td><td>{$list[$i][8]}</td><td><a href='resetAddress.php?action=fixAddress&id={$list[$i][0]}&name={$list[$i][1]}&isM={$isM}&isW={$isW}&place={$list[$i][3]}&phone={$list[$i][4]}&qq={$list[$i][5]}&wechat={$list[$i][6]}&company={$list[$i][7]}&position={$list[$i][8]}'>修改</a></td><td><a href='action.php?action=deleteAddress&id={$list[$i][0]}'>删除</a></td></tr>";
+                                                }
+                                            }else{
+                                                for($i=0;$i<count($list);$i++){
+                                                    if($list[$i][2]=='女'){
+                                                        $isM = false;
+                                                        $isW = true;
+                                                    }
+                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td>{$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td><td>{$list[$i][6]}</td><td>{$list[$i][7]}</td><td>{$list[$i][8]}</td><td><a href='javascript:void(0);' onclick='alertError()'>修改</a></td><td><a href='javascript:void(0);' onclick='alertError()'>删除</a></td></tr>";
+                                                }
                                             }
-                                        ?>
-<!--                                        <tr onclick="openDetils()">-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>文科楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>图书馆</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
 
-
+//                                        ?>
+<!--                                        <tr>-->
+<!--                                            <td>02</td>-->
+<!--                                            <td>高阳</td>-->
+<!--                                            <td>男</td>-->
+<!--                                            <td>山东省济南市长清区齐鲁工业大学</td>-->
+<!--                                            <td>11111111111</td>-->
+<!--                                            <td>111111111</td>-->
+<!--                                            <td>wechatss</td>-->
+<!--                                            <td>齐鲁工业大学</td>-->
+<!--                                            <td>学生</td>-->
+<!--                                            <td>修改</td>-->
+<!--                                            <td>删除</td>-->
+<!---->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>03</td>-->
+<!--                                            <td>高鹰</td>-->
+<!--                                            <td>修改</td>-->
+<!--                                            <td>删除</td>-->
+<!--                                        </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- /.table-responsive -->
                             </div>
                             <!-- /.panel-body -->
+                            <div class="panel panel-footer">
+                                <a <?php if($user_weight[0]=='1'){echo "href='resetAddress.php?action=addAddress'";}else{echo "href='javascript:void(0);' onclick='alertError()'";} ?>" class="btn btn-primary ">增加人员</a>
+                            </div>
                         </div>
                         <!-- /.panel -->
                     </div>
@@ -272,6 +262,11 @@ $list = $rs->fetchAll();
     <script src="../dist/js/admin_system.js"></script>
     <!-- my table JavaScript -->
     <script src="../dist/js/Myfunction.js"></script>
+    <script>
+        function alertError(){
+            alert("sorry,您的权限不够");
+        }
+    </script>
 </body>
 
 </html>

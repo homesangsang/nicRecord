@@ -8,9 +8,6 @@ if(!isset($_SESSION['uid'])){
 include('../database/connectDB.php');//包含数据库连接文件
 $userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
-$query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
-$rs = $pdo->query($query_sql);
-$list = $rs->fetchAll();
 
 ?>
 
@@ -150,7 +147,7 @@ $list = $rs->fetchAll();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >故障列表</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >常用后台地址</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -167,76 +164,38 @@ $list = $rs->fetchAll();
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th width="50px">ID</th>
-                                            <th>地点</th>
-                                            <th>故障</th>
-                                            <th width="70px">维修人</th>
-                                            <th width="100px">时间</th>
+                                            <th>ID</th>
+                                            <th>名称</th>
+                                            <th>链接</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
-                                            for($i=0;$i<count($list);$i++){
-                                                echo "<tr onclick=\"openDetils({$list[$i][6]})\"><td>{$list[$i][0]}</td><td>{$list[$i][1]} {$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td></tr>";
-                                            }
-                                        ?>
-<!--                                        <tr onclick="openDetils()">-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>文科楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>图书馆</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
 
+                                        <tr>
+                                            <td>1</td>
+                                            <td>锐捷认证</td>
+                                            <td><a href="http://172.17.21.111:8080/sam/" target="_blank">http://172.17.21.111:8080/sam/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>OA</td>
+                                            <td><a href="http://oa.qlu.edu.cn/" target="_blank">http://oa.qlu.edu.cn/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Webplus站群</td>
+                                            <td><a href="http://webplus.qlu.edu.cn/" target="_blank">http://webplus.qlu.edu.cn/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>邮箱</td>
+                                            <td><a href="http://210.44.144.55/webadmin/" target="_blank">http://210.44.144.55/webadmin/</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>数字工大</td>
+                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                        </tr>
 
                                         </tbody>
                                     </table>
@@ -244,6 +203,9 @@ $list = $rs->fetchAll();
                                 <!-- /.table-responsive -->
                             </div>
                             <!-- /.panel-body -->
+                            <div class="panel panel-footer">
+                                <a href='javascript:void(0);' onclick='openAllpages()'" class="btn btn-primary ">一键打开所有页面</a>
+                            </div>
                         </div>
                         <!-- /.panel -->
                     </div>
@@ -272,6 +234,14 @@ $list = $rs->fetchAll();
     <script src="../dist/js/admin_system.js"></script>
     <!-- my table JavaScript -->
     <script src="../dist/js/Myfunction.js"></script>
+    <script>
+        function openAllpages(){
+            var arr = new Array("http://172.17.21.111:8080/sam/","http://oa.qlu.edu.cn/","http://webplus.qlu.edu.cn/","http://210.44.144.55/webadmin/","http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check")
+            for(var i=0;i<arr.length;i++){
+                window.open(arr[i]);
+            }
+        }
+    </script>
 </body>
 
 </html>

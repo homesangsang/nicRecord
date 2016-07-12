@@ -8,12 +8,7 @@ if(!isset($_SESSION['uid'])){
 include('../database/connectDB.php');//包含数据库连接文件
 $userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
-$query_sql = "select repair_id,build_name,room,repair_describe,username,repair_time,id from repair,build,users where repair.build_id=build.build_id and repair.user_id=users.uid ORDER BY id DESC";
-$rs = $pdo->query($query_sql);
-$list = $rs->fetchAll();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +35,7 @@ $list = $rs->fetchAll();
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--my css -->
     <link href="../dist/css/MyTable.css" rel="stylesheet"  type="text/css">
+    <link href="../bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -150,7 +146,7 @@ $list = $rs->fetchAll();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header yaheiFont" style="color: grey" >故障列表</h2>
+                        <h2 class="page-header yaheiFont" style="color: grey" >请填写人员信息</h2>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -158,97 +154,75 @@ $list = $rs->fetchAll();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                           <!-- <div class="panel-heading">
-                                Kitchen Sink
-                            </div> -->
-                            <!-- /.panel-heading -->
+
                             <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th width="50px">ID</th>
-                                            <th>地点</th>
-                                            <th>故障</th>
-                                            <th width="70px">维修人</th>
-                                            <th width="100px">时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                            for($i=0;$i<count($list);$i++){
-                                                echo "<tr onclick=\"openDetils({$list[$i][6]})\"><td>{$list[$i][0]}</td><td>{$list[$i][1]} {$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td></tr>";
-                                            }
-                                        ?>
-<!--                                        <tr onclick="openDetils()">-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>文科楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051702</td>-->
-<!--                                            <td>图书馆</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>2016XX051701</td>-->
-<!--                                            <td>办公楼</td>-->
-<!--                                            <td>连不上网</td>-->
-<!--                                            <td>杨柳</td>-->
-<!--                                            <td>2016-05-17</td>-->
-<!--                                        </tr>-->
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <form role="form" name="resetForm" action="action.php?action=<?php echo $_GET['action']?>&id=<?php echo $_GET['id']?>" method="post" onsubmit="return InputCheck(this)">
 
 
-                                        </tbody>
-                                    </table>
+                                            <div class="form-group">
+                                                <label>姓名</label>
+                                                <input id="input_name" name="input_name" class="form-control" type="text"  value="<?php echo $_GET['name']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="margin-right: 20px">性别</label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="sex" id="sex1" value="男" <?php if($_GET['isM'])echo 'checked=true'?>"> 男
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="sex" id="sex2" value="女" <?php if($_GET['isW'])echo 'checked=true'?>"> 女
+                                                </label>
+                                            </div>
+                                            <div class="form-group <?php if($_GET['action']=='fixAddress') echo 'hidden'?>" id="select_place">
+                                                <label>居住地</label>
+                                                    <div class="info form-group form-inline">
+                                                        <div>
+                                                            <select style="width: 100px" id="s_province" class="form-control " name="s_province"></select>  
+                                                            <select style="width: 100px" id="s_city" class="form-control" name="s_city" ></select>  
+                                                            <select  id="s_county" class="form-control" name="s_county"></select>
+                                                            <script class="resources library" src="../dist/js/area.js" type="text/javascript"></script>
+                                                            <script type="text/javascript">_init_area();</script>
+                                                        </div>
+                                                        <div id="show"></div>
+                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>详细地址</label>
+                                                <input id="input_place" name="input_place" class="form-control" type="text"  value="<?php echo $_GET['place']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>手机号</label>
+                                                <input id="input_phone" name="input_phone" class="form-control" type="text"  value="<?php echo $_GET['phone']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>QQ</label>
+                                                <input id="input_qq" name="input_qq" class="form-control" type="text"  value="<?php echo $_GET['qq']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>微信</label>
+                                                <input id="input_wechat" name="input_wechat" class="form-control" type="text"  value="<?php echo $_GET['wechat']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>工作单位</label>
+                                                <input id="input_company" name="input_company" class="form-control" type="text"   value="<?php echo $_GET['company']?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>职务</label>
+                                                <input id="input_position" name="input_position" class="form-control" type="text"  value="<?php echo $_GET['position']?>">
+                                            </div>
+
+                                            <input type="submit" class="btn btn-primary "/>
+                                            <input type="reset" class="btn btn-warning"/>
+                                        </form>
+                                    </div>
+                                    <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <!-- /.table-responsive -->
                             </div>
-                            <!-- /.panel-body -->
+                            <!--/.panel-body-->
                         </div>
-                        <!-- /.panel -->
                     </div>
-                    <!-- /.col-lg-12 -->
-
+                    <!--/.col-lg-12-->
                 </div>
                 <!-- /.row -->
             </div>
@@ -270,8 +244,29 @@ $list = $rs->fetchAll();
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/admin_system.js"></script>
+
     <!-- my table JavaScript -->
     <script src="../dist/js/Myfunction.js"></script>
+    <script>
+        function InputCheck(resetForm){
+            if(resetForm.input_name.value==""){
+                alert("姓名不能为空");
+//                resetForm.id.focus();
+                return (false);
+            }
+
+
+        }
+
+        var Gid  = document.getElementById ;
+        var showArea = function(){
+            Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+                Gid('s_city').value + " - 县/区" +
+                Gid('s_county').value + "</h3>"
+        }
+        Gid('s_county').setAttribute('onchange','showArea()');
+
+    </script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@
     $users_query_sql = "select count(1) from users";
     $area_query_sql = "select build_name,repair_count from build,buildcount where build.build_id=buildcount.build_id";
     $time_query_sql = "select * from weekcount";
+    $addressbook_query_sql = "select count(1) from addressbook";
 //查询故障数
     $rs = $pdo->query($repair_count_query_sql);
     $rs->setFetchMode(PDO::FETCH_NUM);
@@ -21,6 +22,10 @@
     $rs = $pdo->query($users_query_sql);
     $row = $rs->fetch();
     $users_count = $row[0];
+//查询通讯录条数
+$rs = $pdo->query($addressbook_query_sql);
+$row = $rs->fetch();
+$addressbook_count = $row[0];
 //获取地区分布数据
     $rs = $pdo->query($area_query_sql);
 
@@ -136,6 +141,25 @@ $time_count = $rs->fetch();
                                 <li>
                                     <a href="usermanager.php">人员管理</a>
                                 </li>
+                                <li>
+                                    <a href="addressBook.php">通讯录管理</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li><!--工具-->
+                            <a href="#"><i class="fa  fa-wrench fa-fw"></i>工具<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="scanPortInput.php" target="_blank">端口扫描</a>
+                                </li>
+                                <li>
+                                    <a href="machineRoom.php">弱电间分布</a>
+                                </li>
+                                <li>
+                                    <a href="management.php">常用后台</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -214,6 +238,28 @@ $time_count = $rs->fetch();
                             </div>
                         </div>
                         <a href="usermanager.php">
+                            <div class="panel-footer">
+                                <span class="pull-left">管理</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-th-list fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo ($addressbook_count)?></div>
+                                    <div>通讯录</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="addressBook.php">
                             <div class="panel-footer">
                                 <span class="pull-left">管理</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

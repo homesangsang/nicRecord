@@ -8,7 +8,7 @@
 session_start();
 include('../database/connectDB.php');//包含数据库连接文件
 //登录
-if(empty($_POST['id']) && empty($_GET['action'])){
+if(empty($_POST['uid']) && empty($_GET['action'])){
     exit('非法访问');
 }
 switch($_GET['action']){
@@ -160,6 +160,62 @@ switch($_GET['action']){
             echo "<script>alert('添加成功');window.location='usermanager.php'</script>";
         }else{
             echo "<script>alert('出错啦 (add user fail)');window.location='resetuserinfo.php?action=adduser'</script>";
+
+        }
+        break;
+    case 'addAddress':
+        $input_name = $_POST['input_name'];
+        $sex = $_POST['sex'];
+        $s_province = $_POST['s_province'];
+        $s_city = $_POST['s_city'];
+        $s_county = $_POST['s_county'];
+        $input_place = $_POST['input_place'];
+        $input_phone = $_POST['input_phone'];
+        $input_qq = $_POST['input_qq'];
+        $input_wechat = $_POST['input_wechat'];
+        $input_company = $_POST['input_company'];
+        $input_position = $_POST['input_position'];
+        $input_place = $s_province.$s_city.$s_county.$input_place;
+        $addAddress_sql = "insert into addressbook (name,sex,place,phone,qq,wechat,company,position) values('{$input_name}','{$sex}','{$input_place}','{$input_phone}','{$input_qq}','{$input_wechat}','{$input_company}','{$input_position}')";
+        $rs = $pdo->exec($addAddress_sql);
+        if($rs){
+
+            echo "<script>alert('添加成功');window.location='addressBook.php'</script>";
+        }else{
+//            var_dump($rs);
+            echo "<script>alert('出错啦 (add address fail)');window.location='resetAddress.php?action=addAddress'</script>";
+        }
+
+        break;
+    case 'fixAddress':
+
+        $input_uid = $_GET['id'];
+        $input_name = $_POST['input_name'];
+        $sex = $_POST['sex'];
+        $input_place = $_POST['input_place'];
+        $input_phone = $_POST['input_phone'];
+        $input_qq = $_POST['input_qq'];
+        $input_wechat = $_POST['input_wechat'];
+        $input_company = $_POST['input_company'];
+        $input_position = $_POST['input_position'];
+
+        $fixAddress_sql = "update addressbook set name='{$input_name}',sex='{$sex}',place='{$input_place}',phone={$input_phone},qq={$input_qq},wechat='{$input_wechat}',company='{$input_company}',position='{$input_position}' WHERE uid={$input_uid}";
+        $rs = $pdo->exec($fixAddress_sql);
+        if($rs){
+
+            echo "<script>alert('修改成功');window.location='addressBook.php'</script>";
+        }else{
+            echo "<script>alert('出错啦 (fix address fail)');window.location='resetAddress.php?action=addAddress'</script>";
+        }
+        break;
+    case 'deleteAddress':
+        $input_uid = $_GET['id'];
+        $deleteAddress_sql = "delete from addressbook where uid={$input_uid}";
+        $rs = $pdo->exec($deleteAddress_sql);
+        if($rs){
+            echo "<script>window.location='addressBook.php'</script>";
+        }else{
+            echo "<script>alert('出错啦 (delete user fail)');window.location='addressBook.php'</script>";
 
         }
         break;

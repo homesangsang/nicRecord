@@ -117,6 +117,25 @@ $list = $rs->fetchAll();
                                 <li>
                                     <a href="usermanager.php">人员管理</a>
                                 </li>
+                                <li>
+                                    <a href="addressBook.php">通讯录管理</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li><!--工具-->
+                            <a href="#"><i class="fa  fa-wrench fa-fw"></i>工具<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="scanPortInput.php" target="_blank">端口扫描</a>
+                                </li>
+                                <li>
+                                    <a href="machineRoom.php">弱电间分布</a>
+                                </li>
+                                <li>
+                                    <a href="management.php">常用后台</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
