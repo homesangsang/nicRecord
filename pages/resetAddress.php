@@ -101,7 +101,7 @@ $username = $_SESSION['username'];
                             <a href="main.php"><i class="fa fa-dashboard fa-fw"></i>仪表盘</a>
                         </li>
                         <li><!--自定义菜单-->
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i>我的菜单<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i>工作菜单<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="list.php">故障列表</a>
@@ -109,31 +109,35 @@ $username = $_SESSION['username'];
                                 <li>
                                     <a href="add.php">提交故障</a>
                                 </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="usermanager.php"><i class="fa  fa-user fa-fw"></i>人员管理</a>
+                        </li>
+                        <li><!--工具-->
+                            <a href="#"><i class="fa  fa-wrench fa-fw"></i>常用工具<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="usermanager.php">人员管理</a>
-                                </li>
-                                <li>
-                                    <a href="addressBook.php">通讯录管理</a>
+                                    <a href="scanPortInput.php" target="_blank">端口扫描</a>
                                 </li>
 
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li><!--工具-->
-                            <a href="#"><i class="fa  fa-wrench fa-fw"></i>工具<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="scanPortInput.php" target="_blank">端口扫描</a>
-                                </li>
-                                <li>
-                                    <a href="machineRoom.php">弱电间分布</a>
-                                </li>
-                                <li>
-                                    <a href="management.php">常用后台</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                        <li>
+                            <a href="management.php"><i class="fa fa-shield fa-fw"></i>常用后台</a>
                         </li>
+                        <li>
+                            <a href="machineRoom.php"><i class="fa fa-map-marker fa-fw"></i>弱电间分布</a>
+                        </li>
+                        <li>
+                            <a href="markNote.php" target="_blank"><i class="fa fa-pencil fa-fw"></i>在线云笔记</a>
+                        </li>
+                        <li>
+                            <a href="addressBook.php"><i class="fa fa-th-list fa-fw"></i>网络中心通讯录</a>
+                        </li>
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
