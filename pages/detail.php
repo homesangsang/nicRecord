@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
     exit();
 }
 include('../database/connectDB.php');//包含数据库连接文件
-$userid = $_SESSION['userid'];
+$userid = $_SESSION['uid'];
 $username = $_SESSION['username'];
 $type = $_GET['type'];
 $repair_id = $_GET['repair_id'];

@@ -173,57 +173,94 @@ $username = $_SESSION['username'];
                                         <tr>
                                             <td>1</td>
                                             <td>图书馆</td>
-                                            <td><a href="http://172.17.21.111:8080/sam/" target="_blank">http://172.17.21.111:8080/sam/</a></td>
+                                            <td>-1F：图书馆西面，地下室入口附近<br/>
+                                                1F ：B区系电梯相邻<br/>
+                                                2F ：B区西北，西北侧电梯北邻<br/>
+                                                3F ：同上<br/>
+                                                4F ：同上<br/>
+                                                5F ：同上<br/>
+                                                6F ：B区西北面楼梯内<br/>
+                                                7F ：同上<br/>
+                                                特征：弱电间门上除了一楼和负一楼，全部都有“弱电间”牌子<br/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>办公楼</td>
-                                            <td><a href="http://oa.qlu.edu.cn/" target="_blank">http://oa.qlu.edu.cn/</a></td>
+                                            <td>1F:东南角<br/>
+                                                2F:东南，228对面<br/>
+                                                3F:东南，326对面；西北<br/>
+                                                4F:东南，424斜对面；西北，427对面<br/>
+                                                5F:526斜对面，台球桌旁边；西北540西邻<br/>
+                                                特征，全部贴有：机房重地，闲人免进  字样，弱电间和强电间相邻。3-5楼在西北方向的弱电间是一个门，进去有二个房间，其中分别有弱电间和强电间
+
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>机电楼</td>
-                                            <td><a href="http://webplus.qlu.edu.cn/" target="_blank">http://webplus.qlu.edu.cn/</a></td>
+                                            <td>机电楼AB：（从西侧进入）沿每层东西方向走廊向东走，第一个路口处右转，弱电间在东面的墙上<br/>
+                                                机电楼C：（从西侧进入）沿每层东西方向走廊向东走，直至东侧机电楼东侧楼梯，弱电间在南面的墙上</td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
                                             <td>文科楼</td>
-                                            <td><a href="http://210.44.144.55/webadmin/" target="_blank">http://210.44.144.55/webadmin/</a></td>
+                                            <td>弱电间靠近南北两侧楼梯，各一个，位于东面的走廊</td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
                                             <td>食工楼</td>
-                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                            <td>每层都有弱电间，有的两层在一块（钥匙上的标签贴的很清楚），钥匙在B座大厅大爷那，每层弱电间在楼梯口附近一个浅黄色的门<br/>A座门向北<br/>
+                                                BC座门向南，一楼中间走廊弱电间是整座食工楼网络总入口</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>轻化楼</td>
+                                            <td><p>A</p>	1F	101对面<br/>
+                                                2F	201对面<br/>
+                                                3F	301对面<br/>
+                                                4F	401对面<br/>
+                                                5F	501对面<br/>
+                                               <p>B</p>	1F	南北向走廊，最北面，东边墙上<br/>
+                                                2F	南北向走廊，最北面，东边墙上<br/>
+                                                3F	南北向走廊，最北面，东边墙上<br/>
+                                                4F	南北向走廊，最北面，东边墙上<br/>
+                                                5F	南北向走廊，最北面，东边墙上<br/>
+                                                <p>C</p>	1F	101对面<br/>
+                                                2F	203对面<br/>
+                                                3F	303对面<br/>
+                                                4F	“泰山学者教授”牌子西侧<br/>
+                                                5F	503对面<br/>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
                                             <td>一餐</td>
-                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                            <td>南面墙，小顽酷水果吧牌子西侧小门，钥匙在保卫处张科长那，或联系老师</td>
                                         </tr>
                                         <tr>
                                             <td>7</td>
                                             <td>三餐</td>
-                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                            <td>从北面墙进去，二楼215</td>
                                         </tr>
                                         <tr>
                                             <td>8</td>
                                             <td>工程训练中心</td>
-                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                            <td>1F 酒博物馆玻璃门里面<img src="../dist/image/machineRoom01.jpg" width="150px"/><br/>
+                                                2F 楼梯拐角处
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>9</td>
-                                            <td>实验楼</td>
-                                            <td><a href="http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check" target="_blank">http://210.44.144.205:8071/sso/login?service=http%3A%2F%2F210.44.144.205%3A8071%2Fj_spring_cas_security_check</a></td>
+                                            <td>后勤楼</td>
+                                            <td>上下两层，只有一个弱电间，在一楼中间，楼梯下面，有个不到1米5高的小门，两个交换机都在里面</td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- /.table-responsive -->
                             </div>
-                            <!-- /.panel-body -->
-<!--                            <div class="panel panel-footer">-->
-<!--                                <a href='javascript:void(0);' onclick='openAllpages()'" class="btn btn-primary ">一键打开所有页面</a>-->
-<!--                            </div>-->
+
                         </div>
                         <!-- /.panel -->
                     </div>
