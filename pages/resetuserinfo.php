@@ -171,7 +171,11 @@ $username = $_SESSION['username'];
                                             </div>
                                             <div class="form-group">
                                                 <label>姓名</label>
-                                                <input id="username" name="username" class="form-control" type="text" value="<?php echo $_GET['username']?>">
+                                                <input id="username" name="username" class="form-control" type="text" value="<?php
+                                                if($_GET['action']=="adduser"){
+                                                    echo $_GET['username'];
+                                                }
+                                                ?>">
                                             </div>
                                             <?php
                                             if($_GET['action']=="adduser"){
