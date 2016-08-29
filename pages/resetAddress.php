@@ -167,15 +167,23 @@ $username = $_SESSION['username'];
 
                                             <div class="form-group">
                                                 <label>姓名</label>
-                                                <input id="input_name" name="input_name" class="form-control" type="text"  value="<?php echo $_GET['name']?>">
+                                                <input id="input_name" name="input_name" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['name']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label style="margin-right: 20px">性别</label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="sex" id="sex1" value="男" <?php if($_GET['isM'])echo 'checked=true'?>"> 男
+                                                    <input type="radio" name="sex" id="sex1" value="男" <?php
+                                                    if($_GET['action']=="fixAddress"){
+                                                        if($_GET['isM']){echo 'checked=true';  }
+                                                    }
+                                                    ?>"> 男
                                                 </label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="sex" id="sex2" value="女" <?php if($_GET['isW'])echo 'checked=true'?>"> 女
+                                                    <input type="radio" name="sex" id="sex2" value="女" <?php
+                                                    if($_GET['action']=="fixAddress"){
+                                                        if($_GET['isW']){echo 'checked=true';}
+                                                    }
+                                                    ?>"> 女
                                                 </label>
                                             </div>
                                             <div class="form-group <?php if($_GET['action']=='fixAddress') echo 'hidden'?>" id="select_place">
@@ -193,27 +201,27 @@ $username = $_SESSION['username'];
                                             </div>
                                             <div class="form-group">
                                                 <label>详细地址</label>
-                                                <input id="input_place" name="input_place" class="form-control" type="text"  value="<?php echo $_GET['place']?>">
+                                                <input id="input_place" name="input_place" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['place']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>手机号</label>
-                                                <input id="input_phone" name="input_phone" class="form-control" type="text"  value="<?php echo $_GET['phone']?>">
+                                                <input id="input_phone" name="input_phone" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['phone']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>QQ</label>
-                                                <input id="input_qq" name="input_qq" class="form-control" type="text"  value="<?php echo $_GET['qq']?>">
+                                                <input id="input_qq" name="input_qq" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['qq']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>微信</label>
-                                                <input id="input_wechat" name="input_wechat" class="form-control" type="text"  value="<?php echo $_GET['wechat']?>">
+                                                <input id="input_wechat" name="input_wechat" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['wechat']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>工作单位</label>
-                                                <input id="input_company" name="input_company" class="form-control" type="text"   value="<?php echo $_GET['company']?>">
+                                                <input id="input_company" name="input_company" class="form-control" type="text"   value="<?php if($_GET['action']=='fixAddress') echo $_GET['company']?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>职务</label>
-                                                <input id="input_position" name="input_position" class="form-control" type="text"  value="<?php echo $_GET['position']?>">
+                                                <input id="input_position" name="input_position" class="form-control" type="text"  value="<?php if($_GET['action']=='fixAddress') echo $_GET['position']?>">
                                             </div>
 
                                             <input type="submit" class="btn btn-primary "/>

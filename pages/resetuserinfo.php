@@ -167,15 +167,11 @@ $username = $_SESSION['username'];
 
                                             <div class="form-group">
                                                 <label>账号</label>
-                                                <input id="user_id" name="user_id" class="form-control" type="text" <?php if($_GET['action']=="fix")echo "readonly=\"readonly\"" ?>  value="<?php echo $_GET['userid']?>">
+                                                <input id="user_id" name="user_id" class="form-control" type="text" <?php if($_GET['action']=="fix")echo "readonly=\"readonly\"" ?>  value="">
                                             </div>
                                             <div class="form-group">
                                                 <label>姓名</label>
-                                                <input id="username" name="username" class="form-control" type="text" value="<?php
-                                                if($_GET['action']=="adduser"){
-                                                    echo $_GET['username'];
-                                                }
-                                                ?>">
+                                                <input id="username" name="username" class="form-control" type="text" value="">
                                             </div>
                                             <?php
                                             if($_GET['action']=="adduser"){

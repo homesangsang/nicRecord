@@ -94,8 +94,6 @@ switch($_GET['action']){
             $pdo->rollback(); // 执行失败，事务回滚
 //            exit($e->getMessage());
             echo "<script>alert('提交失败".$e->getMessage()."');window.location='list.php'</script>";
-        }finally{
-            $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, true);
         }
         break;
     case 'layout':
