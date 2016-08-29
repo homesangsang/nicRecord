@@ -15,10 +15,9 @@ switch($_GET['action']){
     case 'login':
         $trueVerification = strtoupper($_SESSION['verification']);
         $userVerification = strtoupper($_POST['verification']);
+        $id = htmlspecialchars(trim($_POST['id']));
         if($userVerification==$trueVerification){
-            $id = htmlspecialchars(trim($_POST['id']));
             $password = sha1($_POST['password']);
-
             $check_sql = "select uid,username from users where uid='$id' and password='$password'";
             $rs = $pdo->query($check_sql);
             $rs->setFetchMode(PDO::FETCH_ASSOC);

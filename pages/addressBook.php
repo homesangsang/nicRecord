@@ -236,13 +236,12 @@ $user_weight = $rs->fetch();
                             </div>
                             <!-- /.panel-body -->
                             <div class="panel panel-footer">
-                                <a <?php if($user_weight[0]=='1'){echo "href='resetAddress.php?action=addAddress'";}else{echo "href='javascript:void(0);' onclick='alertError()'";} ?>" class="btn btn-primary ">增加人员</a>
+                                <a href="resetAddress.php?action=addAddress" class="btn btn-primary ">增加人员</a>
                             </div>
                         </div>
                         <!-- /.panel -->
                     </div>
                     <!-- /.col-lg-12 -->
-
                 </div>
                 <!-- /.row -->
             </div>
