@@ -202,7 +202,7 @@ switch($_GET['action']){
 
             echo "<script>alert('修改成功');window.location='addressBook.php'</script>";
         }else{
-            echo "<script>alert('出错啦 (fix address fail)');window.location='resetAddress.php?action=addAddress'</script>";
+            echo "<script>alert('出错啦，信息没有变化 (fix address fail)');window.location='addressBook.php'</script>";
         }
         break;
     case 'deleteAddress':

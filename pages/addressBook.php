@@ -204,7 +204,7 @@ $user_weight = $rs->fetch();
                                                         $isM = false;
                                                         $isW = true;
                                                     }
-                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td>{$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td><td>{$list[$i][6]}</td><td>{$list[$i][7]}</td><td>{$list[$i][8]}</td><td><a href='javascript:void(0);' onclick='alertError()'>修改</a></td><td><a href='javascript:void(0);' onclick='alertError()'>删除</a></td></tr>";
+                                                    echo "<tr><td>{$list[$i][0]}</td><td>{$list[$i][1]}</td><td>{$list[$i][2]}</td><td>{$list[$i][3]}</td><td>{$list[$i][4]}</td><td>{$list[$i][5]}</td><td>{$list[$i][6]}</td><td>{$list[$i][7]}</td><td>{$list[$i][8]}</td><td><a href='resetAddress.php?action=fixAddress&id={$list[$i][0]}&name={$list[$i][1]}&isM={$isM}&isW={$isW}&place={$list[$i][3]}&phone={$list[$i][4]}&qq={$list[$i][5]}&wechat={$list[$i][6]}&company={$list[$i][7]}&position={$list[$i][8]}'>修改</a></td><td><a href='javascript:void(0);' onclick='alertError()'>删除</a></td></tr>";
                                                 }
                                             }
 
