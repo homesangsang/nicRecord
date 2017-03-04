@@ -42,24 +42,24 @@
 
  > 表的结构 `build`
  > 
-`CREATE TABLE IF NOT EXISTS `build` (
+```CREATE TABLE IF NOT EXISTS `build` (
   `build_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '建筑id',
   `build_name` varchar(30) NOT NULL COMMENT '建筑名称',
   `build_class` varchar(30) NOT NULL COMMENT '类别',
   PRIMARY KEY (`build_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;`
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;```
 
 > 表的结构 `buildcount`
 > 
-`CREATE TABLE IF NOT EXISTS `buildcount` (
+```CREATE TABLE IF NOT EXISTS `buildcount` (
   `build_id` int(10) unsigned NOT NULL COMMENT '建筑id',
   `repair_count` int(10) unsigned NOT NULL COMMENT '数量',
   PRIMARY KEY (`build_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;```
 
 >表的结构 `repair`
 >
-`CREATE TABLE IF NOT EXISTS `repair` (
+```CREATE TABLE IF NOT EXISTS `repair` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `repair_id` bigint(20) unsigned NOT NULL COMMENT '故障id',
   `user_id` bigint(15) unsigned NOT NULL COMMENT '维修人',
@@ -72,29 +72,29 @@
   `note` varchar(300) NOT NULL COMMENT '心得',
   PRIMARY KEY (`id`),
   KEY `repair_id` (`repair_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;`
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;```
 
 > 表的结构 `search`
 > 
-> `CREATE TABLE IF NOT EXISTS `search` (
+> ```CREATE TABLE IF NOT EXISTS `search` (
   `repair_id` bigint(20) unsigned NOT NULL,
   `content` varchar(1000) NOT NULL,
   PRIMARY KEY (`repair_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;```
 
 > 表的结构 `users`
 > 
-> `CREATE TABLE IF NOT EXISTS `users` (
+> ```CREATE TABLE IF NOT EXISTS `users` (
   `uid` bigint(15) unsigned NOT NULL COMMENT '用户id',
   `username` varchar(30) NOT NULL COMMENT '用户名称',
   `password` varchar(200) NOT NULL COMMENT '密码',
   `weight` int(2) unsigned NOT NULL COMMENT '权重',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;```
 
 > 表的结构 `weekcount`
 > 
-> `CREATE TABLE IF NOT EXISTS `weekcount` (
+> ```CREATE TABLE IF NOT EXISTS `weekcount` (
   `id` int(10) unsigned NOT NULL,
   `one` int(10) unsigned NOT NULL,
   `two` int(10) unsigned NOT NULL,
@@ -104,7 +104,7 @@
   `six` int(10) unsigned NOT NULL,
   `seven` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;`
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;```
 
 ***
 
