@@ -76,7 +76,8 @@
 
 > 表的结构 `search`
 > 
-> ```CREATE TABLE IF NOT EXISTS `search` (
+> 
+```CREATE TABLE IF NOT EXISTS `search` (
   `repair_id` bigint(20) unsigned NOT NULL,
   `content` varchar(1000) NOT NULL,
   PRIMARY KEY (`repair_id`)
@@ -84,7 +85,8 @@
 
 > 表的结构 `users`
 > 
-> ```CREATE TABLE IF NOT EXISTS `users` (
+> 
+```CREATE TABLE IF NOT EXISTS `users` (
   `uid` bigint(15) unsigned NOT NULL COMMENT '用户id',
   `username` varchar(30) NOT NULL COMMENT '用户名称',
   `password` varchar(200) NOT NULL COMMENT '密码',
@@ -94,7 +96,8 @@
 
 > 表的结构 `weekcount`
 > 
-> ```CREATE TABLE IF NOT EXISTS `weekcount` (
+> 
+```CREATE TABLE IF NOT EXISTS `weekcount` (
   `id` int(10) unsigned NOT NULL,
   `one` int(10) unsigned NOT NULL,
   `two` int(10) unsigned NOT NULL,
